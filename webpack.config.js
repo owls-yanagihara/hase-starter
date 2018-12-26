@@ -1,6 +1,7 @@
 const MODE = "development";
 const ENABLED_SOURCEMAP = MODE === "development";
 
+const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -23,53 +24,6 @@ module.exports = {
 
   module: {
     rules: [
-      // {
-      //   test: /\.scss/,
-      //   use: [
-      //     "style-loader",
-      //     {
-      //       loader: "css-loader",
-      //       options: {
-      //         url: false
-      //       }
-      //     },
-      //     {
-      //       loader: "sass-loader",
-      //       options: {
-      //         sourceMap: true
-      //       }
-      //     }
-      //   ]
-      // },
-      // {
-      //   test: /\.scss/, // 対象となるファイルの拡張子
-      //   // ローダー名
-      //   use: [
-      //     MiniCssExtractPlugin.loader,
-      //     {
-      //       loader: "css-loader",
-      //       options: {
-      //         // オプションでCSS内のurl()メソッドを取り込む
-      //         url: true,
-      //         // ソースマップの利用有無
-      //         sourceMap: ENABLED_SOURCEMAP,
-      //
-      //         // 0 => no loaders (default);
-      //         // 1 => postcss-loader;
-      //         // 2 => postcss-loader, sass-loader
-      //         importLoaders: 2
-      //       }
-      //     },
-      //     // Sassをバンドルするための機能
-      //     {
-      //       loader: "sass-loader",
-      //       options: {
-      //         // ソースマップの利用有無
-      //         sourceMap: enabledSourceMap
-      //       }
-      //     }
-      //   ]
-      // },
       {
         test: /\.js$/,
         use: [
@@ -124,8 +78,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        from: `${__dirname}/src/images`,
-        to: `${__dirname}/dist/images`
+        from: path.resolve(__dirname, "src/images/"),
+        to: path.resolve(__dirname, "dist/images/")
       }
     ]),
     new ImageminPlugin({

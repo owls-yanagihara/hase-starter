@@ -1,3 +1,3 @@
 export default function bar() {
-  console.log("js test message ");
+  console.log("js test message!");
 }
